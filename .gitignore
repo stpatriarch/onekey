@@ -218,3 +218,6 @@ __marimo__/
 #Macos
 .DS_Store
 Thumbs.db
+
+#user
+sandbox.py

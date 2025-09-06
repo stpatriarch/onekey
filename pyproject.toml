@@ -23,5 +23,5 @@ packages = [
 package-dir = {"" = "src"}
 
 [project.scripts]
-onekey = "onkey.main:main"
+onekey = "onekey.main:main"
 

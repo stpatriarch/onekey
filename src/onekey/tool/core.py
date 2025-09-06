@@ -1,7 +1,6 @@
 import hashlib
 import base64
 from getpass import getpass
-import pyperclip
 
 def get_user_input(label, requered=False):
         
@@ -70,4 +69,6 @@ class OneKeyCore:
     
 
 if __name__ == '__main__':
+    import pyperclip
     pyperclip.paste()
+
