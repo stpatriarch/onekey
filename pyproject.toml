@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=49.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "onekey"
+version = "0.0.1.dev0925"
+description = "Գաղտանաբռերի մենեջեր հիմնաված հեշ sha256 վրա։"
+authors = [
+    { name = "Stpatrirach" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "setuptools>=49.0.0",
+    "pyperclip>=1.9.0"
+]
+
+[tool.setuptools]
+packages = [
+"onekey", 
+"onekey.tool", 
+] 
+package-dir = {"" = "src"}
+
+[project.scripts]
+onekey = "onkey.main:main"
+
