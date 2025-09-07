@@ -1,6 +1,7 @@
 import hashlib
 import base64
 from getpass import getpass
+import pyperclip as clip
 
 def get_user_input(label, requered=False):
         
@@ -37,11 +38,16 @@ class OneKeyCore:
         self.req_len  = 64
         self.ukey = self.get_phrase()
         self.dom = self.get_domain()
-        self.hash = self.get_hash_sum
+        self.hash = clip.copy(self.final_hash_sum)
+        print('Your password copied to clipboard')
 
         
+    def get_hash_sum(func):
+        def wrapper(self):     
+            return hashlib.sha256(str.encode(func(self))).hexdigest() 
+        return wrapper
 
-
+    @get_hash_sum
     def get_phrase(self):
          
         secret_phrase = getpass('Please enter your unical secret phrase: ')
@@ -51,24 +57,26 @@ class OneKeyCore:
 
         return secret_phrase
 
-     
+    @get_hash_sum 
     def get_domain(self):
         
-        value = input('please enter account domain: ') or None
+        domain = input('please enter account domain: ') or None
         
-        while not value:
-            value = input('Domain lebel can\'t be empty: ') or None
-        return value     
+        while not domain:
+            domain = input('Domain lebel can\'t be empty: ') or None
+        return domain     
      
     @property
-    def get_hash_sum(self):
+    def final_hash_sum(self):
      hash_sum = hashlib.sha256(str.encode(self.ukey + self.dom)).digest()
      return base64.b64encode(hash_sum).decode('ascii')
 
     
-    
+
+
+
 
 if __name__ == '__main__':
-    import pyperclip
-    pyperclip.paste()
+    one = OneKeyCore()
+    
 
