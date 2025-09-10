@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
 # Այստեղ իրականացված են գործիքի բոլոր բազզային ֆունկցիոնալ հնարավորությունները։
-
 import hashlib
 import base64
 from getpass import getpass
-import pyperclip as clip
 
 
 class OneKeyCore:
@@ -14,9 +12,8 @@ class OneKeyCore:
 
         self.domain_for_show = domain if domain else None
         self.req_len  = 64
-        self.ukey = unikey if unikey else self.get_key()
-        self.domain = domain if domain else self.get_domain()
-        self.hash = clip.copy(self.final_hash_sum)
+        self.ukey = self.final_hash_sum(unikey) if unikey else self.get_key()
+        self.domain = self.final_hash_sum(domain.lower()) if domain else self.get_domain()
         
     def get_hash_sum(func):
         def wrapper(self):     
@@ -26,39 +23,54 @@ class OneKeyCore:
     @get_hash_sum
     def get_key(self):
          
-        secret_phrase = getpass('Please enter your unical secret key: ')
+        secret_phrase = getpass('\U0001F510 Please enter your unical secret key: ')
 
         while not len(secret_phrase) == self.req_len:
-              secret_phrase = getpass('Please enter valid, 64 character unical secret key: ')
+              secret_phrase = getpass('\U0001F514 Please enter valid, 64 character unical secret key: ')
 
         return secret_phrase
 
     @get_hash_sum 
     def get_domain(self):
         
-        domain = input('please enter account domain: ') or None
+        domain = input('\U0001F3E2 please enter account domain: ') or None
         
         while not domain:
-            domain = input('Domain lebel can\'t be empty: ') or None
+            domain = input('\U0001F514 Domain lebel can\'t be empty: ') or None
         self.domain_for_show = domain
-        return domain     
-    
-    def __del__(self):
-        print(f'Your password for {self.domain_for_show.upper()} copied to clipboard')
-        return 
-    
+        return domain.lower()   
+
+    def close(self):
+
+        if isinstance(self.import_error_handle, tuple):
+
+            print(f'\U00002705 Your password for {self.domain_for_show.upper()} copied to clipboard.')
+        
+        else:
+            print(f'\U00002705 This is Your password {self.import_error_handle} for {self.domain_for_show.upper()}') 
+
     @property
-    def final_hash_sum(self):
-     hash_sum = hashlib.sha256(str.encode(self.ukey + self.domain)).digest()
-     return base64.b64encode(hash_sum).decode('ascii')
+    def import_error_handle(self):
+        try:
+            import  pyperclip
+            return pyperclip.copy(self.final_hash_sum()), []
+        
+        except ImportError:
+            return self.final_hash_sum()    
+
+
+    def final_hash_sum(self, arg=None):
+        
+        if arg:
+            return hashlib.sha256(str.encode(arg)).hexdigest()
+        hash_sum = hashlib.sha256(str.encode(self.ukey + self.domain)).digest()
+        return base64.b64encode(hash_sum).decode('ascii')
 
     
    
 
-
-
-
 if __name__ == '__main__':
-    OneKeyCore()
+    one = OneKeyCore()
+    one.close()
     
 
