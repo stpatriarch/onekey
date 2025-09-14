@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "onekey"
-version = "0.0.1.dev0925"
+version = "0.0.1.dev140925"
 description = "Password meneger based on sha256 hash."
 readme = "README.md"
 authors = [{ name = "Stpatrirach", email = "chinaryannarek@gmail.com"}]
@@ -12,7 +12,8 @@ license = { file = "LICENSE"}
 requires-python = ">=3.10"
 dependencies = [
     "setuptools>=49.0.0",
-    "pyperclip>=1.9.0"
+    "pyperclip>=1.9.0",
+    "requests>=2.32.5"
 ]
 
 [tool.setuptools]

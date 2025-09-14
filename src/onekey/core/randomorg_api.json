@@ -1,0 +1,12 @@
+{
+    "jsonrpc": "2.0",
+    "method": "generateStrings",
+    "params": {
+        "apiKey": "2d34c259-2b5a-4770-9d29-443549d3ece7",
+        "n": 8,
+        "length": 10,
+        "characters": "abcdefghijklmnopqrstuvwxyz",
+        "replacement": true
+    },
+    "id": 42
+}

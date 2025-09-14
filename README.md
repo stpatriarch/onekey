@@ -60,6 +60,7 @@ KxgvhkGvQPng1MTISNkf2dN8S0iyP/Tle7EjDBNvGkk=
 * Գաղտնաբառերը ապահովում են **288.4 բիթ էնտրոպիա**։
 * Կռահելը համարվում է **մաթեմատիկապես անհնարին** (միլիարդավոր տարիներ՝ հարյուրավոր սուպերհամակարգիչների համար)։
 * Գաղտնաբառը ոչ պահելու, ոչ էլ հիշելու կարիք չկա։
+* Նոր ապահով բանալիի գեներատիվ ֆունկցիա (նոր օգտատերերի համար)։
 
 ---
 
@@ -116,6 +117,7 @@ KxgvhkGvQPng1MTISNkf2dN8S0iyP/Tle7EjDBNvGkk=
 * Пароли обладают **288,4 битами энтропии**.
 * Подбор считается **математически невозможным** (миллиарды лет для сотен суперкомпьютеров).
 * Пароль не нужно хранить и не нужно запоминать.
+* Функция генерации нового ключа, если у вас нет ее(для новых пользователей).
 
 ---
 
@@ -171,3 +173,4 @@ KxgvhkGvQPng1MTISNkf2dN8S0iyP/Tle7EjDBNvGkk=
 * Passwords provide **288.4 bits of entropy**.
 * Brute-forcing them is **mathematically infeasible** (billions of years for hundreds of supercomputers).
 * No need to store or remember the password.
+* New secure key generation if you dont have it (for new users)։

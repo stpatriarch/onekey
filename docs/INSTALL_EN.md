@@ -36,4 +36,13 @@ onekey
 # Second method: You can enter both the key and the host at once.
 # The generated password will be copied to the clipboard.
 onekey -k your_key_here -h your_host_here
+
+# New secure key generation if you don’t have one. Works in two modes.
+
+# Simple random generation. Cannot be recovered.
+onekey --keygen 
+
+# Generation from your chosen phrase. Can be recovered.
+onekey --keygen secret_word 
+
 ```

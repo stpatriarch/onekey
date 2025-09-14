@@ -13,13 +13,13 @@ class Hasher:
         self.hexhash = lambda x: hashlib.sha256(str.encode(x)).hexdigest()
 
 
-    def get_hash_sum(func):
+    def get_hash_sum(func) -> object:
         def wrapper(self):     
-            return hashlib.sha256(str.encode(func(self))).hexdigest() 
-        return wrapper      
-
+            return self.hexhash(func(self)) 
+        return wrapper   
+       
     @property
-    def final_hash_sum(self):
+    def final_hash_sum(self) -> str:
         hash_sum = hashlib.sha256(str.encode(self.ukey + self.domain)).digest()
         return base64.b64encode(hash_sum).decode('ascii')
 
@@ -36,7 +36,7 @@ class OneKeyCore(Hasher):
  
     
     @Hasher.get_hash_sum
-    def get_key(self):
+    def get_key(self) -> str:
 
         required_len = 64
         
@@ -48,7 +48,7 @@ class OneKeyCore(Hasher):
         return secret_phrase
 
     @Hasher.get_hash_sum 
-    def get_domain(self):
+    def get_domain(self) -> str:
         
         domain = input('\U0001F3E2 please enter account domain: ') or None
         
@@ -56,8 +56,8 @@ class OneKeyCore(Hasher):
             domain = input('\U0001F514 Domain lebel can\'t be empty: ') or None
         self.domain_for_show = domain
         return domain.lower()   
-
-    def close(self):
+    
+    def close(self) -> None:
         
         is_tuple = isinstance(self.import_error_handle, tuple)
 
@@ -68,7 +68,7 @@ class OneKeyCore(Hasher):
             print(f'\U00002705 This is Your password {self.import_error_handle} for {self.domain_for_show.upper()}') 
 
     @property
-    def import_error_handle(self):
+    def import_error_handle(self) -> str:
         try:
             import  pyperclip
             return pyperclip.copy(self.final_hash_sum), []
